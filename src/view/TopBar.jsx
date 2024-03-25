@@ -1,10 +1,18 @@
 import styled, {keyframes} from "styled-components";
+import {lighten,darken} from 'polished';
+
+const primary = 'DeepPink';
+const secondary = 'lime';
+const danger = 'Orange';
 
 const TopBar = ({ children }) => (
   <Div>
     <h1>{children}</h1>
+    <Button >Click me</Button>
+    <Btn bg={secondary}>Click me</Btn>
+    <Button bg={primary}>Click me</Button>
+    <Btn bg={danger}>Click me</Btn>
     <img className="logo" src="icons/logo.svg" alt="logo" />
-    <h1>Hello</h1>
   </Div>
 );
 export default TopBar;
@@ -43,4 +51,29 @@ const Div = styled.div`
   }
 `;
 
+const Button = styled.button`
+  outline-style: none;
+  border-style: none;
+  background: ${(props)=> props.bg ? props.bg : 'skyblue'};
+  background: ${(props)=> props.bg || 'skyblue'};
+  background: ${({bg})=> bg || 'skyblue'};
+  text-transform: uppercase;
+  color: white;
+  font-size: 2.8rem;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-family: "Yanone Kaffeesatz", sans-serif;
 
+  &:hover {
+    background: ${({bg})=> lighten(0.1, bg || 'skyblue')};
+  }
+  &:active {
+    background:  ${({bg})=> darken(0.1, bg || 'skyblue')};;
+  }
+`
+
+const Btn = styled(Button)`
+  border-radius: 0;
+  border: white 2px solid;
+`
